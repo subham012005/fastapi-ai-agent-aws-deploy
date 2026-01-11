@@ -21,6 +21,6 @@ __pycache__/
 Thumbs.db
 
 # Large data/models
-document_for_rag/
-*.pdf
+# document_for_rag/
+# *.pdf
 faiss_index/

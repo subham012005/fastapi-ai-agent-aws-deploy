@@ -18,11 +18,11 @@ embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
 
 model= ChatOpenAI(model="gpt-4", temperature=0)
 
-directory_path = (
-    "D:\Vibe_CODEING\Assignment_first500days\document_for_rag"
-)
+# Use relative path for portability
+base_dir = os.path.dirname(os.path.abspath(__file__))
+directory_path = os.path.join(base_dir, "document_for_rag")
 
-loader = PyPDFDirectoryLoader("document_for_rag/")
+loader = PyPDFDirectoryLoader(directory_path)
 documents = loader.load()
 
 
