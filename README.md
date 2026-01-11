@@ -77,9 +77,11 @@ The application is deployed on **AWS EC2** instead of Azure.
 -   **Cost-Effective**: Utilizing the AWS Free Tier (t2.micro) ensures the backend stays free for testing and evaluation.
 
 **Deployment Steps on EC2:**
-1.  **Environment**: Ubuntu 22.04 LTS on a `t2.micro` instance.
+1.  **Environment**: Ubuntu 24.04 LTS on a `t3.micro` instance.
 2.  **Containerization**: The app is containerized using Docker to ensure consistency between local and cloud environments.
 3.  **Process Management**: Docker handles the application lifecycle, with ports mapped to enable public access via the EC2 Elastic IP/Public IPv4.
+4.  **Routing Api**: In ubuntu connect to your instance and route the trafic to local host of that machine using nginx.
+5.  **In Case Using Github** : clone github repo. and install all the dependecy from requirements.txt and run like local depolyment. 
 
 ---
 
