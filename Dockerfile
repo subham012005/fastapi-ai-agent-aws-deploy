@@ -1,12 +1,18 @@
-# Use official AWS Lambda Python base image
-FROM public.ecr.aws/lambda/python:3.9
+# Use official Python image
+FROM python:3.9-slim
 
-# Copy function code and dependencies
-COPY task1.py task2.py task3.py requirements.txt .
-COPY document_for_rag ./document_for_rag
+# Set working directory
+WORKDIR /app
 
 # Install dependencies
-RUN pip install -r requirements.txt
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Set the CMD to your handler (task3.handler)
-CMD [ "task3.handler" ]
+# Copy application code
+COPY . .
+
+# Expose port (Internal)
+EXPOSE 8080
+
+# Run uvicorn on port 8080
+CMD ["uvicorn", "task3:app", "--host", "0.0.0.0", "--port", "8080"]

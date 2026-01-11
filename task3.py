@@ -1,7 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 from typing import Optional, List
-from mangum import Mangum
 
 # Import RAG agent
 from task2 import agent as get_rag_agent
@@ -20,9 +19,6 @@ app = FastAPI(
 
 # Initialize agent once (important)
 rag_agent = get_rag_agent
-
-# Mangum wrapper for AWS Lambda
-handler = Mangum(app)
 
 # ---------------------------------
 # SCHEMAS
@@ -45,7 +41,7 @@ class AskResponse(BaseModel):
 def home():
     return {
         "status": "running",
-        "message": "AI Engineer Assignment API (Lambda) is up and running.",
+        "message": "AI Engineer Assignment API (AWS EC2) is up and running.",
         "endpoints": {
             "ask": "POST /ask",
             "docs": "/docs"

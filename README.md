@@ -41,7 +41,7 @@ graph TD
 
 1.  **Clone the Repository**:
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/subham012005/fastapi-ai-agent-aws-deploy.git
     cd Assignment_first500days
     ```
 
@@ -57,7 +57,7 @@ graph TD
     ```
 
 4.  **Configure Environment**:
-    Create a `.env` file in the root directory (or use the existing one):
+    Create a `.env` file in the root directory:
     ```env
     OPENAI_API_KEY=your_openai_api_key_here
     ```
@@ -67,18 +67,19 @@ graph TD
     - **Task 2 (RAG Agent)**: `python task2.py`
     - **Task 3 (FastAPI Server)**: `uvicorn task3:app --reload`
 
-### ☁️ Azure Deployment (Azure App Service)
+### ☁️ AWS Deployment (EC2)
 
-1.  **Prepare for Deployment**:
-    Ensure `requirements.txt` and `task3.py` are in the root.
-2.  **Create Azure App Service**:
-    - Choose **Python 3.10+** environment.
-    - Set the **Startup Command**: `uvicorn task3:app --host 0.0.0.0 --port 8000`.
-3.  **Environment Variables**:
-    - Go to **Configuration** > **Application Settings**.
-    - Add `OPENAI_API_KEY`.
-4.  **Deploy**:
-    Deploy via GitHub Actions or Local Git using Azure CLI.
+The application is deployed on **AWS EC2** instead of Azure. 
+
+**Rationale for using AWS over Azure:**
+-   **Account Accessibility**: Encountered technical issues with Azure account creation and management, preventing the use of Azure App Services.
+-   **Flexibility**: AWS EC2 provides a robust, standard Linux environment that is highly compatible with containerized FastAPI applications.
+-   **Cost-Effective**: Utilizing the AWS Free Tier (t2.micro) ensures the backend stays free for testing and evaluation.
+
+**Deployment Steps on EC2:**
+1.  **Environment**: Ubuntu 22.04 LTS on a `t2.micro` instance.
+2.  **Containerization**: The app is containerized using Docker to ensure consistency between local and cloud environments.
+3.  **Process Management**: Docker handles the application lifecycle, with ports mapped to enable public access via the EC2 Elastic IP/Public IPv4.
 
 ---
 
