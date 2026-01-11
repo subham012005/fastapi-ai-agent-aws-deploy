@@ -1,20 +1,12 @@
-# Use official Python image
-FROM python:3.9-slim
+# Use official AWS Lambda Python base image
+FROM public.ecr.aws/lambda/python:3.9
 
-# Set working directory
-WORKDIR /app
-
-# Copy requirements file
-COPY requirements.txt .
+# Copy function code and dependencies
+COPY task1.py task2.py task3.py requirements.txt .
+COPY document_for_rag ./document_for_rag
 
 # Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
-# Copy the rest of the application code
-COPY . .
-
-# Expose the port FastAPI will run on
-EXPOSE 8080
-
-# Command to run the application
-CMD ["uvicorn", "task3:app", "--host", "0.0.0.0", "--port", "8080"]
+# Set the CMD to your handler (task3.handler)
+CMD [ "task3.handler" ]
